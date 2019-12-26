@@ -63,17 +63,17 @@ namespace OpenTKTut
             // sceenEngine.AddShape(sp);
             sp = new Shapes.Sphere(new Vector3(00.0f, 20.0f, 90.0f), 1, new Vector3(0.0f, 20.0f, 80.0f), true, true);
             // sceenEngine.AddShape(sp);
-            sp = new Shapes.Sphere(new Vector3(025.0f, 15.0f, 80.0f), 3, new Vector3(0.0f, 0.0f, 80.0f),new Vector3(0,0,0), true,true);
+            sp = new Shapes.Sphere(new Vector3(025.0f*1.5f, 15.0f*1.5f, 80.0f), 6, new Vector3(0.0f, 0.0f, 80.0f),new Vector3(0,0,0), true,true);
             sp.tex_load(@"C:\Users\modern\Desktop\New folder\Textures\V.bmp");
             sp.tex_enable = true;
             sp.speed_sun = 1;
             sceenEngine.AddShape(sp);
 
-            sp = new Shapes.Sphere(new Vector3(27.0f, 18.0f, 80.0f), 1, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(0, 0, 0), true, true);
+            sp = new Shapes.Sphere(new Vector3(27.0f*1.5f, 18.0f*1.5f, 80.0f), 3, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(0, 0, 0), true, true);
 
             sp.speed_sun = 1;
             sp.speed_plant = 5;
-            sp.Center_rotate_plant=(new Vector3(25.0f, 15.0f, 80.0f));
+            sp.Center_rotate_plant=(new Vector3(25.0f*1.5f, 15.0f*1.5f, 80.0f));
             sp.angle_rotate_far_center_plant=(new Vector3(30, 45, 70));
             sp.EnableAutoRotate_at_other_place_plant = true;
             sp.Color = new float[3];
@@ -88,7 +88,7 @@ namespace OpenTKTut
 
 
 
-            sp = new Shapes.Sphere(new Vector3(025.0f, -15.0f, 80.0f), 5, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(-45, 0, 0), true, true);
+            sp = new Shapes.Sphere(new Vector3(025.0f*1.5f, -15.0f*1.5f, 80.0f), 8, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(-45,  45, 0), true, true);
 
             sp.speed_sun = 1;
 
@@ -100,11 +100,11 @@ namespace OpenTKTut
             sp.tex_load(@"C:\Users\modern\Desktop\New folder\Textures\BigEarth.bmp");
             sp.tex_enable = true;
 
-            sp = new Shapes.Sphere(new Vector3(17.0f, -12.0f, 80.0f), 1, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(-45, 0, 0), true, true);
+            sp = new Shapes.Sphere(new Vector3(17.0f*1.5f, -12.0f*1.5f, 80.0f), 3, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(-45,  45, 0), true, true);
 
             sp.speed_sun = 1;
             sp.speed_plant = 2;
-            sp.Center_rotate_plant = (new Vector3(25.0f, -15.0f, 80.0f));
+            sp.Center_rotate_plant = (new Vector3(25.0f*1.5f, -15.0f*1.5f, 80.0f));
             sp.EnableAutoRotate_at_other_place_plant = true;
             sp.Color = new float[3];
             sp.Color[0] = 1.00f;
@@ -116,7 +116,7 @@ namespace OpenTKTut
             sceenEngine.AddShape(sp);
 
 
-            sp = new Shapes.Sphere(new Vector3(0.0f, 0.0f, 80.0f), 10, new Vector3(0.0f, 0.0f, 0), new Vector3(0, 0, 0), true, true);
+            sp = new Shapes.Sphere(new Vector3(0.0f, 0.0f, 80.0f), 15, new Vector3(0.0f, 0.0f, 0), new Vector3(0, 0, 0), true, true);
 
 
             sp.Color = new float[3];
@@ -129,7 +129,7 @@ namespace OpenTKTut
 
             sceenEngine.AddShape(sp);
 
-            sp = new Shapes.Sphere(new Vector3(25.0f, 25.0f, 80.0f), 4, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(0, 0, 0), true, true);
+            sp = new Shapes.Sphere(new Vector3(25.0f*2f,25.0f*2f,80.0f), 7, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(0, 0, 0), true, true);
 
             sp.speed_sun = 1;
 
@@ -141,11 +141,11 @@ namespace OpenTKTut
             sp.tex_load(@"C:\Users\modern\Desktop\New folder\Textures\MARS.bmp");
             sp.tex_enable = true;
 
-            sp = new Shapes.Sphere(new Vector3(18.0f, 25.0f, 80.0f), 2, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(0, 0, 0), true, true);
+            sp = new Shapes.Sphere(new Vector3(18.0f*2f,25.0f*2f,80.0f), 5, new Vector3(0.0f, 0.0f, 80.0f), new Vector3(0, 0, 0), true, true);
 
             sp.speed_sun = 1;
             sp.speed_plant = 2;
-            sp.Center_rotate_plant = (new Vector3(25.0f, 25.0f, 80.0f));
+            sp.Center_rotate_plant = (new Vector3(25.0f*2f,25.0f*2f,80.0f));
             sp.angle_rotate_far_center_plant = new Vector3(90, 0, 0);
             sp.EnableAutoRotate_at_other_place_plant = true;
             sp.Color = new float[3];

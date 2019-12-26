@@ -29,12 +29,22 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 using OpenTKTut.Shapes; 
 namespace OpenTKTut
 {
+ 
     partial class SceenEngine
     {
-        private List<OGLShape> _drawingList;
+         
+        float speed = 1.5f;
+        float angle=0;
+       
+        static Vector3 position = new Vector3(0.0f, 0.0f, 3.0f);
+        static Vector3 front = new Vector3(0.0f, 0.0f, -1.0f);
+        static Vector3 up = new Vector3(0.0f, 1.0f, 0.0f);
+        static Matrix4 view = Matrix4.LookAt(position, position + front, up);
+       private List<OGLShape> _drawingList;
         private void InitializeObjects()
         {
             _drawingList = new List<OGLShape>();
@@ -49,20 +59,20 @@ namespace OpenTKTut
 
         private void _window_Load(object sender, EventArgs e)
         {
-            GL.ClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            GL.ClearColor(0.0f, 0.0f, 0.05f, 0.0f);
             GL.Enable(EnableCap.DepthTest);
             //Lights
 
             GL.Enable(EnableCap.Lighting);
            // GL.Enable(EnableCap.ColorMaterial);
-            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 20.0f, 0.0f,40.0f });
+            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 20.0f, 20.0f,10.0f });
             GL.Light(LightName.Light0, LightParameter.Diffuse,new float[] { 1.0f, 1.0f, 1.0f });
             GL.Light(LightName.Light0, LightParameter.Specular, new float[] { 1.0f, 0.0f, 0.0f });
             //GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 1.0f, 1.0f, 0.0f });
-            GL.Enable(EnableCap.Light0);
-           // GL.ShadeModel(ShadingModel.Smooth);
+           GL.Enable(EnableCap.Light0);
+           GL.ShadeModel(ShadingModel.Smooth);
             
-           // GL.Enable(EnableCap.Texture2D);
+            GL.Enable(EnableCap.Texture2D);
         }
 
         private void _window_Resize(object sender, EventArgs e)
@@ -73,19 +83,71 @@ namespace OpenTKTut
             GL.LoadIdentity();
             GL.Ortho(0, 100, 0, 100, -1, 1);
             GL.Frustum(0, 100, 0, 100, 70, 200);
-            Matrix4 prespective = Matrix4.CreatePerspectiveFieldOfView(45.0f * 3.14f / 180.0f, (_window.Width+1) / (_window.Height+1 ),0.5f, 400.0f);
+            Matrix4 prespective = Matrix4.CreatePerspectiveFieldOfView((80.0f+angle) * 3.14f / 180.0f, (_window.Width+1) / (_window.Height+1 ),0.5f, 400.0f);
            
            // Matrix4 prespective = Matrix4.CreatePerspectiveOffCenter(-150.0f, 150.0f, -150.0f, 150.0f, 1.0f, 100.0f);
             GL.LoadMatrix(ref prespective);
             GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadMatrix(ref view);
         }
 
         private void _window_RenderFrame(object sender, OpenTK.FrameEventArgs e)
         {
             GL.LoadIdentity();
+            //***load model view and update it
+            GL.MatrixMode(MatrixMode.Modelview);
+            view = Matrix4.LookAt(position, position + front, up);
+            GL.LoadMatrix(ref view);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            
-            for(int i=0;i<_drawingList.Count;i++)
+            KeyboardState input = Keyboard.GetState();
+
+            //keyboard handle
+
+            if (input.IsKeyDown(Key.W))
+            {
+                position += front * speed; //Forward 
+            }
+
+            if (input.IsKeyDown(Key.S))
+            {
+                position -= front * speed; //Backwards
+            }
+
+            if (input.IsKeyDown(Key.A))
+            {
+                position -= Vector3.Normalize(Vector3.Cross(front, up)) * speed; //Left
+            }
+
+            if (input.IsKeyDown(Key.D))
+            {
+                position += Vector3.Normalize(Vector3.Cross(front, up)) * speed; //Right
+            }
+
+            if (input.IsKeyDown(Key.Up))
+            {
+            //    angle -= 1;
+                position += up * speed; //Up 
+            }
+
+            if (input.IsKeyDown(Key.Down))
+            {
+              //  angle += 1;
+                position -= up * speed; //Down
+            }
+            if (input.IsKeyDown(Key.Keypad6))
+            {
+                angle -= 2;
+               // position += up * speed; //Up 
+            }
+
+            if (input.IsKeyDown(Key.Keypad9))
+            {
+                angle += 1;
+                //position -= up * speed; //Down
+            }
+            //****draw3
+            GL.Rotate(angle, Vector3.UnitZ);
+            for (int i=0;i<_drawingList.Count;i++)
             {
                 _drawingList[i].Draw();
             }
